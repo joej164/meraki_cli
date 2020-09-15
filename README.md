@@ -23,9 +23,9 @@ This is a command line tool to be used in the automating of the Meraki VMX.
 
 `./meraki_cli.py network site_to_site_vpn 'new network' --mode none`  # Set the site to site vpn to none
 
-`./meraki_cli.py network site_to_site_vpn 'N_61530429908953XXXX' --is_id --mode none`  # Set the site to site vpn to none using a network ID instead of a name
+`./meraki_cli.py network site_to_site_vpn N_61530429908953XXXX --is_id --mode none`  # Set the site to site vpn to none using a network ID instead of a name
 
 ## Delete a Network
 `./meraki_cli.py network delete 'new network'`  # Delete a network 
 
-`./meraki_cli.py network delete 'N_61530429908953XXXX' --is_id --yes`  # Set the site to site vpn to none using a network ID instead of a name and no confirmation is required
+`./meraki_cli.py network delete N_61530429908953XXXX --is_id --yes`  # Set the site to site vpn to none using a network ID instead of a name and no confirmation is required
