@@ -79,6 +79,40 @@ def network_delete(is_id, network_name, yes):
     click.echo(json.dumps(to_return))
 
 
+@network.command('site_to_site_vpn')
+@click.option('--is_id', is_flag=True, help='If the passed in value is a network id instead of a name, use this parameter')
+@click.option('--mode', type=click.Choice(['none', 'spoke', 'hub']), default='hub')
+@click.argument('network_name', required=True)
+def network_site_to_site_vpn(is_id, network_name, mode):
+    '''Enter the Network Name or Network ID of a network to set the
+    site to site vpn setting
+
+    If passing in a Network ID, set the `is_id` flag'''
+    to_return = {
+        'network_existed': False,
+        'network_updated': False
+    }
+
+    if is_id:
+        network_info = api.get_meraki_network_details(network_name)
+    else:
+        network_id_info = api.find_meraki_network_id(network_name)
+        if network_id_info:
+            network_info = api.get_meraki_network_details(
+                network_id_info['id'])
+        else:
+            network_info = None
+
+    if network_info:
+        to_return['network_existed'] = True
+        results = api.set_meraki_network_appliance_site_to_site_vpn_mode(
+            network_info['id'], mode)
+        click.echo(results)
+        to_return['network_updated'] = True
+
+    click.echo(json.dumps(to_return))
+
+
 @appliance.command('add')
 def appliance_add():
     click.echo('add an appliance ')

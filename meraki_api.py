@@ -54,3 +54,8 @@ class meraki_api():
     def delete_meraki_network(self, network_id: str = None):
         response = self.dashboard.networks.deleteNetwork(network_id)
         return response
+
+    def set_meraki_network_appliance_site_to_site_vpn_mode(self, network_id, mode):
+        vpn_status = self.dashboard.appliance.updateNetworkApplianceVpnSiteToSiteVpn(
+            network_id, mode=mode)
+        return vpn_status
